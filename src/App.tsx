@@ -46,23 +46,23 @@ function App() {
 
   function checkUrl(url: string): boolean {
   const patterns = [
-    /^(https?:\/\/)?(www\.|m\.|vm\.)?(youtube\.com|youtu\.?be)\/.+$/i,
+    /^(https?:\/\/)?(www\.|m\.|vm\.|vt\.)?(youtube\.com|youtu\.?be)\/.+$/i,
     /^(https?:\/\/)?(www\.|m\.|fb\.)?(facebook\.com|fb\.me)\/.+$/i,
     /^(https?:\/\/)?(www\.|m\.)?(instagram\.com|instagr\.am)\/.+$/i,
-    /^(https?:\/\/)?(www\.|m\.|vm\.)?(tiktok\.com)\/.+$/i
+    /^(https?:\/\/)?(www\.|m\.|vm\.|vt\.)?(tiktok\.com)\/.+$/i
   ];
 
   return patterns.some((regex) => regex.test(url));
 }
 
 function matchLink(url: string): string {
-  if (/^(https?:\/\/)?(www\.|m\.|vm\.)?(youtube\.com|youtu\.?be)\/.+$/i.test(url)) {
+  if (/^(https?:\/\/)?(www\.|m\.|vm\.|vt\.)?(youtube\.com|youtu\.?be)\/.+$/i.test(url)) {
     return "YouTube";
   } else if (/^(https?:\/\/)?(www\.|m\.|fb\.)?(facebook\.com|fb\.me)\/.+$/i.test(url)) {
     return "Facebook";
   } else if (/^(https?:\/\/)?(www\.|m\.)?(instagram\.com|instagr\.am)\/.+$/i.test(url)) {
     return "Instagram";
-  } else if (/^(https?:\/\/)?(www\.|m\.|vm\.)?(tiktok\.com)\/.+$/i.test(url)) {
+  } else if (/^(https?:\/\/)?(www\.|m\.|vm\.|vt\.)?(tiktok\.com)\/.+$/i.test(url)) {
     return "TikTok";
   }
   return "";
