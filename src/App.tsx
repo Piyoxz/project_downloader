@@ -283,16 +283,14 @@ function matchLink(url: string): string {
           draggable: true,
         });
       } else {
-        const downloadUrl = preview?.videoUrl || preview?.audioUrl;
+        const downloadUrl = key === "audio" ? preview?.audioUrl : preview?.videoUrl;
         if (!downloadUrl) {
           throw new Error("No download URL available");
         }
-
         const a = document.createElement("a");
         a.href = downloadUrl;
-        a.download = `${preview?.title}.mp4`;
+        a.download = `${preview?.title}${key === "audio" ? ".mp3" : ".mp4"}`;
         a.click();
-
         toast.success("Download started successfully!", {
           position: "bottom-right",
           autoClose: 3000,
@@ -535,7 +533,7 @@ function matchLink(url: string): string {
                     <div className="space-y-4 mt-4">
                       {/* Video Download */}
                       <button
-                        onClick={() => handleDownload(preview.videoUrl)}
+                        onClick={() => handleDownload(preview.videoUrl, "video")}
                         disabled={downloading}
                         className="w-full bg-[#FFE5E5] px-6 py-3 border-4 border-black rounded
                      hover:bg-[#FF8DC7] transition-colors
@@ -552,7 +550,7 @@ function matchLink(url: string): string {
 
                       {/* Audio Download */}
                       <button
-                        onClick={() => handleDownload(preview.audioUrl)}
+                        onClick={() => handleDownload(preview.audioUrl, "audio")}
                         disabled={downloading}
                         className="w-full bg-[#B6E388] px-6 py-3 border-4 border-black rounded
                      hover:bg-[#9ED572] transition-colors
