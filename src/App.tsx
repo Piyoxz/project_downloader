@@ -45,38 +45,28 @@ function App() {
   ];
 
   function checkUrl(url: string): boolean {
-    const youtubeRegex =
-      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
-    const facebookRegex = /^(https?:\/\/)?(www\.)?(facebook\.com|fb\.me)\/.+$/;
-    const instagramRegex = /^(https?:\/\/)?(www\.)?(instagram\.com)\/.+$/;
-    const tiktokRegex = /^(https?:\/\/)?(www\.)?(tiktok\.com)\/.+$/;
+  const patterns = [
+    /^(https?:\/\/)?(www\.|m\.|vm\.)?(youtube\.com|youtu\.?be)\/.+$/i,
+    /^(https?:\/\/)?(www\.|m\.|fb\.)?(facebook\.com|fb\.me)\/.+$/i,
+    /^(https?:\/\/)?(www\.|m\.)?(instagram\.com|instagr\.am)\/.+$/i,
+    /^(https?:\/\/)?(www\.|m\.|vm\.)?(tiktok\.com)\/.+$/i
+  ];
 
-    return (
-      youtubeRegex.test(url) ||
-      facebookRegex.test(url) ||
-      instagramRegex.test(url) ||
-      tiktokRegex.test(url)
-    );
+  return patterns.some((regex) => regex.test(url));
+}
+
+function matchLink(url: string): string {
+  if (/^(https?:\/\/)?(www\.|m\.|vm\.)?(youtube\.com|youtu\.?be)\/.+$/i.test(url)) {
+    return "YouTube";
+  } else if (/^(https?:\/\/)?(www\.|m\.|fb\.)?(facebook\.com|fb\.me)\/.+$/i.test(url)) {
+    return "Facebook";
+  } else if (/^(https?:\/\/)?(www\.|m\.)?(instagram\.com|instagr\.am)\/.+$/i.test(url)) {
+    return "Instagram";
+  } else if (/^(https?:\/\/)?(www\.|m\.|vm\.)?(tiktok\.com)\/.+$/i.test(url)) {
+    return "TikTok";
   }
-
-  function matchLink(url: string): string {
-    const youtubeRegex =
-      /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
-    const facebookRegex = /^(https?:\/\/)?(www\.)?(facebook\.com|fb\.me)\/.+$/;
-    const instagramRegex = /^(https?:\/\/)?(www\.)?(instagram\.com)\/.+$/;
-    const tiktokRegex = /^(https?:\/\/)?(www\.)?(tiktok\.com)\/.+$/;
-
-    if (youtubeRegex.test(url)) {
-      return "YouTube";
-    } else if (facebookRegex.test(url)) {
-      return "Facebook";
-    } else if (instagramRegex.test(url)) {
-      return "Instagram";
-    } else if (tiktokRegex.test(url)) {
-      return "TikTok";
-    }
-    return "";
-  }
+  return "";
+}
 
   const getVideoIdFromUrl = (url: String) => {
     const regex =
